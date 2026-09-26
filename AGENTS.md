@@ -1,0 +1,199 @@
+# Is GW231123 edge-on at merger? (gw231123-edge-on)
+
+Instructions for every agent that works in this repository, and a summary for people. This
+file is loaded at the start of every session. Keep it short: every line here costs every
+session.
+
+## 0. Rules that are never broken
+
+1. **No secrets in the repo.** Tokens, passwords and keys live in environment variables or
+   in a git-ignored file outside the repo. Never commit, print or paste one.
+2. **Write for the public.** Everything in this repo may become public unless it is marked
+   private (§6). Write every document so that a stranger can read it: no private remarks
+   about people, no judgements of other people's work beyond normal technical criticism. A
+   public document mentions soft-private material at most in passing, and never mentions
+   hard-private material.
+3. **Nothing reaches the public repo except through the `open-science-publish:publish` skill**, and
+   only after the user approves the publish report.
+4. **No site-specific details in tracked files.** No absolute paths, usernames, hostnames,
+   accounts, partitions or emails. Site settings live in `config/site.local.yaml`
+   (git-ignored); scripts read them from there. Paths are relative to the repo root.
+5. **Only the user sets `verification: human-verified`.** An agent may set `verified`, with
+   an `evidence:` pointer.
+
+## 1. What this project is
+
+This project investigates whether GW231123 is surprisingly edge-on at merger, and what
+the implications would be if it were. Success criteria and key sources: TODO.
+
+The user's full description: `PROJECT.md`. Where things stand now: `context.md`. The logic of the project: `map/README.md` and the
+generated `map/graph.md`; the results and what each rests on: `results/README.md` and
+`map/claims.md`. Rules: `rules/README.md`.
+
+## 2. How to work
+
+- **Scope.** Deliver what was asked, at the scope asked. Make routine judgement calls
+  yourself. If a request looks mistaken, say so in one sentence and continue as asked.
+- **Record the work.** A request for work in this project (an idea to explore, a question to
+  investigate, a derivation, a computation) belongs to a task. If it fits an existing task,
+  work there. Otherwise make one with `open-science-project:new-task` without asking whether
+  to: a brainstorm task when the user says "brainstorm" or the idea is exploratory, a
+  project task for planned project work. When a request may not be work (a quick question,
+  a question about the tools), answer it, then ask at the end whether to start a task that
+  records it. A request to audit, check, reproduce or adversely review work that is already
+  done is a verification task (`--verifies`), made without asking; when it is unclear
+  whether the request is a verification or new work, propose a verification task and ask. Never make the user say "task" or "not a task" before they get an answer. A
+  side question that needs recorded work but does not drive the project is a private
+  investigation (`open-science-project:private-investigation`), without asking.
+- **Literature.** Every source read in full is saved in `lit_cache/`, named by its
+  identifier, and listed in `citations/consulted.md` or `citations/used.bib`. When more
+  than one paper is consulted, subagents read the full texts (the `literature` tier in
+  Claude Code); the main agent works from their reports.
+- **Proportionality.** Match a check's tightness to what the result decides.
+- **No self-verification rounds.** Put a control case (an input that must fail) inside the
+  original check. Do not re-run finished work to confirm it.
+- **Stop digging.** After two rounds on one anomaly with no confirmed mechanism, write the
+  state down honestly and re-plan.
+- **Language.** Write plain, direct English: one idea per sentence, active voice, the
+  outcome first. Say what you mean; avoid metaphor where a literal phrase exists.
+- **Mathematics in LaTeX.** Write every symbol, equation and formula in LaTeX, in every
+  file and message: inline `$\iota_Q(t)$`, displayed `$$ ... $$` on lines of their own. This
+  holds for context files, plans, logs, node summaries, captions, reports and messages.
+  Plain names such as `iota_Q` are for code identifiers only.
+- **Plot captions.** Every plot saved in the project has a caption file beside it, with the
+  plot's stem and `.caption.md` (`bands_2026-09-25.caption.md`). The caption stands on its
+  own: what is plotted; each axis with units; every line, band, marker and colour; the data
+  and their size; and the background a reader needs (the question the plot answers, and what
+  to see in it). A remade plot gets a new caption file with its new name.
+
+## 3. Scientific rigour
+
+1. Every claim has evidence: data, code output or a derivation. Label each number
+   **MEASURED** (with the command that produced it) or **ESTIMATED** (with the reasoning).
+2. A hypothesis is tested, not assumed. Correlation is not causation.
+3. Say "I don't know" when you don't know.
+4. Quote load-bearing external sources verbatim, with an identifier (DOI, arXiv id, URL,
+   commit) and the equation, section or line. Cite with keys (`[@key]`) that resolve in
+   `citations/used.bib`.
+5. When a claim is proven wrong, say so at once, and record it: the node's `status` becomes
+   `failed` or `superseded`, with the reason in its `summary`. Failed routes are kept.
+   Then settle every result that `opsci map build` reports as resting on it.
+6. Every published result has provenance: a `provenance.yaml` beside it with the `src`
+   commit, the environment lock file, the command, and the input checksums.
+7. Every result (something later work relies on, or that answers part of a task's goal;
+   not a debugging finding) has its own file in `tasks/<id>/results/` with a `type: result`
+   header that names where it is stored, the code, what it rests on, and the outside work
+   it uses (`uses:`, keys in `citations/used.bib`). See `tasks/README.md`, "Results".
+
+## 4. Your role, and what to read
+
+| role | you are | read (beyond this file) |
+|---|---|---|
+| main agent | driving a task: planning, dispatching, debugging, reporting | `contracts/main.md`, `context.md`, your task's `tasks/<id>/context.md` |
+| subagent | dispatched with a spec | your spec; `contracts/subagent.md` if your tier says so |
+| side quest | a one-off request that is not project work (§2, "Record the work") | nothing more; if it needs recorded work, its `private-docs/investigations/` file |
+
+Do not read more than your role's list. Rules in `rules/` are opened when a context file or
+a dispatch names their id, not before.
+
+## 5. Where things are
+
+| path | what | who edits |
+|---|---|---|
+| `PROJECT.md` | what the project is about: question, motivation, approach, success, scope, sources | user |
+| `context.md` | project state now: goal, task table, in flight, next step, open questions. ≤200 lines | main agent |
+| `log/YYYY-MM.md` | append-only project log, one line per finished subtask | anyone, append only |
+| `map/README.md` | hand-written narrative of the project's logic, ≤150 lines | main agent, user |
+| `map/graph.md`, `map/dead_ends.md`, `map/claims.md` | GENERATED by `opsci map build`; never edit. `claims.md` is the claims graph: every result, what it rests on, what uses it | nobody |
+| `results/` | milestone results that combine several tasks, one `<result-id>.md` each; `README.md` (GENERATED) lists every milestone result | main agent |
+| `tasks/<id>/` | one task: `context.md` (node header), `plan.md`, `map.md` (the task's graph), `results/` (its scientific results, one file each), `log.md`, `subcontext/`, working files; `verifications/<vid>/` for verification tasks of its work | that task's agents |
+| `verifications/<vid>/` | verification tasks (audits, checks, adverse reviews of finished work) that check more than one task; the same layout as a task | that task's agents |
+| `src/` | common code; never an output path | via worktree branches |
+| `data/` | git-ignored; `data/<task-id>/` holds each task's outputs; `data/MANIFEST.yaml` is tracked | the producing task |
+| `citations/` | `used.bib` (works and software used), `consulted.md` (read but not used) | anyone |
+| `rules/` | one line per rule in `README.md` (R01…); long rules in `R07-*.md` | user, agents |
+| `contracts/` | how the main agent and subagents work | user |
+| `docs/` | documentation for readers and users; published | anyone |
+| `paper/` | optional, laid out by the user | user |
+| `lit_cache/` | full texts of sources; never published | anyone |
+| `archive/` | retired material | main agent |
+| `private-docs/` | private notes and side investigations (`investigations/`); committed, never exported | anyone |
+| `brainstorm/` | ideas before they become project work, with its own `context.md`, `tasks/`, `map/`, `log/`; not published unless the user adds it to the manifest | anyone |
+| `config/` | `site.example.yaml` (tracked), `site.local.yaml` (git-ignored), `framework.yaml` | user |
+| `publish/` | publish allowlist, private policy (never exported), last published commit | user, `publish` skill |
+
+Small outputs go in `tasks/<id>/`; large data in `data/<task-id>/`. Names carry an ISO date
+and the parameters that distinguish them. A new run gets a new name; nothing committed or
+published is overwritten.
+
+**`brainstorm/` and `private-docs/` are soft-private (§6).** No file outside them links to a
+file in them, so the public project has no broken links; a mention in passing, in backticks,
+is allowed. The generated `map/graph.md` is the exception: its published copy links only to
+published files. An idea from `brainstorm/` becomes project work as a new task that restates it
+(see the README in that directory).
+
+## 6. Node headers
+
+Every task, result, paper, site page and published dataset carries a node header: YAML
+front matter at the top of its main document, or a `node.yaml` beside a non-markdown
+artifact. Fields and allowed values: `tasks/README.md`. After changing a header, run
+`opsci map build`; it also rewrites the header table under a task's title (never edit that
+table). Nodes under `brainstorm/` are part of the project graph, drawn in a box of
+their own, and edges may join them to project nodes; `opsci map build` also writes
+`brainstorm/map/` with the brainstorm nodes alone. A brainstorm task is soft-private unless
+its header says otherwise.
+
+The header field `privacy:` grades a node (absent: `policy.default_privacy` in
+`publish/manifest.yaml`, `public` in the template):
+
+| `privacy` | meaning | examples |
+|---|---|---|
+| `public` (default) | may be released; a public task's directory is exported | |
+| `soft-private` | not released, but may be mentioned by name elsewhere; the public map names it without a link, grouped with others or reworded if its header gives too much away | private notes, brainstorm ideas, work too messy to release |
+| `hard-private` | must not appear anywhere in the release, not even by name | proprietary data, unpublished ideas, collaborators' unpublished work, private information about people |
+
+A soft- or hard-private task keeps its work inside `tasks/<id>/`, so that it is easy to keep
+out. Hard-private material outside such a task is listed under `hard_private:` in
+`publish/manifest.yaml`.
+
+## 7. Concurrent work
+
+Each person or main agent working at the same time uses its own git worktree and branch.
+Logs merge automatically (`.gitattributes`: `merge=union`); the map is rebuilt, not merged.
+`context.md` is the one file that needs a real merge; whoever merges checks its line cap.
+
+## 8. Escalation
+
+Stop and report when the task cannot be done as specified, a named file or dataset is
+missing or wrong, or a decision belongs to the user. Report what was tried, what happened
+(verbatim output), the evidence, and two or three options, none carried out. A clean
+escalation is a good outcome; a silent workaround is a failure.
+
+## 9. Waking with no context
+
+A notification can wake a session whose conversation was cleared on purpose. The state is on
+disk. If the notification needs action, run the `open-science-context:continue-context` skill first.
+If it repeats something already handled, do not reload; check that a wake-up is still
+armed, then wait.
+
+## 10. Notion
+
+This project is mirrored to Notion, where the user reads it (skill
+`open-science-project:notion`). `opsci notify` posts to the project's Feed in Notion.
+
+- **Sync after every change.** After you change project files, run `opsci notion sync`. A
+  hook also runs it when a turn ends. `opsci notion diff` then prints `in sync` and names
+  no plot without a caption.
+- **Plots.** Only plots under `tasks/<id>/` appear in the task's page, each with its caption
+  file (section 2). A remade plot gets a new dated name; it replaces the old one in place.
+- **Feed.** Post with `opsci notion post --kind KIND [--task ID] [--mention] [--file PLOT]
+  "text"`: a finished subtask as `result` with its key plot and `--mention`; a question or
+  blocker for the user as `question` or `blocker` with `--mention`; a long job submitted
+  or finished as `status`. While work runs, post a `status` at least once per session. Do
+  not post routine steps.
+- **Anything that waits on the user goes to the Feed**, unasked: a new plan to approve, a
+  hold point, a decision, a question. Sync first, so the task page shows what the message
+  is about, then post it as `question` with `--task` and `--mention` before ending the turn.
+  A message only in the chat is one the user may never see.
+- **Messages expire.** Feed messages are removed after a few days. Anything that must last
+  goes in the project files, which the task pages show.

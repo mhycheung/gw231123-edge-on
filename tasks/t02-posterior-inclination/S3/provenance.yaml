@@ -1,0 +1,23 @@
+# Provenance of the t02 S3 outputs (bands, t = 0 histograms, folded bands, summary JSON,
+# aggregated arrays).
+src_commit: 6ca7208          # last commit touching src/ (merger_inclination.batch), used by S2 and S3
+environment_lock: pixi.lock
+commands:
+  S2: >-
+    sbatch --array=0-155 ... --export=ALL,CHUNK=150,N_POST=18185,N_PRIOR=5000
+    tasks/t02-posterior-inclination/S2/array.sh   (job 20907281; see S2/run.md)
+  S3: pixi run python tasks/t02-posterior-inclination/S3/aggregate.py
+inputs:
+  - path: data/t01-merger-inclination/posterior_samples.h5
+    sha256: f9f4a6394ad836b20165ae02d98639f0bda9ac159616b51eb2cffd37ea0d2fea
+    label: C00:NRSur7dq4 (posterior/samples and priors/samples)
+  - path: data/t01-merger-inclination/surrogates/NRSur7dq4v2.h5
+    sha256: 62f3afb2baeb837ea19692ff6ca8737808e336cfbd9881c474147ae133efc9de
+  - path: data/t02-posterior-inclination/chunks/
+    sha256_of_sorted_file_checksums: 2890ed2d2446aac4975207cbb897171e007883dd29abfcdfba391bbba4407cba
+    note: "cd chunks && sha256sum *.npz | sha256sum"
+outputs:
+  - path: data/t02-posterior-inclination/post_2026-09-25.npz
+    sha256: 652f4959f37329fb4bc8877ec0424308db3c911fb3112363d2a2a5e34f350ce4
+  - path: data/t02-posterior-inclination/prior_2026-09-25.npz
+    sha256: 291f4570732273b9a99cd630487496be515ebafd71486213f1156e3b0f93922c

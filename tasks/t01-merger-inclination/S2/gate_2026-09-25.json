@@ -1,0 +1,47 @@
+{
+ "script": "tasks/t01-merger-inclination/S2/gate.py",
+ "src_commit": "a37549cd3618fd6141e6a5618affe159b2ee8805",
+ "date": "2026-09-25",
+ "input": {
+  "file": "data/t01-merger-inclination/posterior_samples.h5",
+  "label": "C00:NRSur7dq4",
+  "index": 6096,
+  "f_ref_Hz": 10.0
+ },
+ "settings": {
+  "fs_Hz": 4096.0,
+  "window_M": [
+   -500.0,
+   50.0
+  ],
+  "pass": 0.01,
+  "control_fail": 0.1,
+  "surrogate": "gwsurrogate NRSur7dq4 (v1)",
+  "lal": "NRSur7dq4, f_min=0"
+ },
+ "t_star_ours_M": -2.6918694489747215,
+ "t_star_lal_M": -2.691904179598947,
+ "peak_shift_M": -3.473062422543194e-05,
+ "lal_epoch_s": -6.34691253,
+ "results": {
+  "N=(iota, pi/2-phase) [ours]": {
+   "aligned": 6.368216174102122e-05,
+   "unaligned": 6.157859673109309e-05
+  },
+  "control: N=(iota, phase)": {
+   "aligned": 1.6160716993463144,
+   "unaligned": 1.6160681957771452
+  },
+  "control: N=(pi-iota, pi/2-phase)": {
+   "aligned": 1.3978762297294662,
+   "unaligned": 1.3978764168158042
+  },
+  "gwsurrogate inclination/phi_ref output (vs LAL)": {
+   "aligned": 6.368216174102746e-05,
+   "unaligned": 6.157859673110508e-05
+  },
+  "ours vs gwsurrogate own output": 3.8582781868226036e-16
+ },
+ "gate_pass": true,
+ "controls_fail_as_required": true
+}

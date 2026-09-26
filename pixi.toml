@@ -1,0 +1,21 @@
+[workspace]
+name = "gw231123-edge-on"
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[dependencies]
+python = "3.11.*"
+numpy = "*"
+scipy = "*"
+h5py = "*"
+matplotlib = "*"
+pytest = "*"
+lalsuite = "*"
+pip = "*"
+
+[pypi-dependencies]
+gwsurrogate = "*"
+
+[activation.env]
+PYTHONPATH = "$PIXI_PROJECT_ROOT/src"
+LAL_DATA_PATH = "$PIXI_PROJECT_ROOT/data/t01-merger-inclination/lal_data"

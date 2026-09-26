@@ -1,0 +1,28 @@
+# Provenance of the S3 results of t01-merger-inclination (R05).
+date: 2026-09-25
+src_commit: 2f63bcdcc6622f050ee1c7594c7af629c27145ed   # merger_inclination package; S3 scripts committed in the next commit
+environment:
+  lock_file: pixi.lock
+  lock_sha256: d84c3608c5189be59cc851790119a4439c72c88b36a4101366b0b0bbe7e76c96
+  packages: {gwsurrogate: 1.2.0, lal: 7.7.0, lalsimulation: 6.2.0, numpy: 2.4.6, scipy: 1.17.1}
+inputs:
+  - path: data/t01-merger-inclination/posterior_samples.h5
+    sha256: f9f4a6394ad836b20165ae02d98639f0bda9ac159616b51eb2cffd37ea0d2fea
+    label: C00:NRSur7dq4
+    sample: maximum likelihood, index 6096
+  - path: data/t01-merger-inclination/surrogates/NRSur7dq4v2.h5
+    sha256: 62f3afb2baeb837ea19692ff6ca8737808e336cfbd9881c474147ae133efc9de
+  - path: data/t01-merger-inclination/surrogates/NRSur7dq4.h5
+    sha256: 3fc2f58f6ed7a4fff58856b6c01a7dc9155954d2b9fa5d58126a7807826d45d5
+commands:
+  - pixi run python -m merger_inclination.cli --pe data/t01-merger-inclination/posterior_samples.h5 --label C00:NRSur7dq4 --model NRSur7dq4v2 --out tasks/t01-merger-inclination/S3/result_C00-NRSur7dq4_NRSur7dq4v2_2026-09-25.json
+  - pixi run python -m merger_inclination.cli --pe data/t01-merger-inclination/posterior_samples.h5 --label C00:NRSur7dq4 --model NRSur7dq4 --out tasks/t01-merger-inclination/S3/result_C00-NRSur7dq4_NRSur7dq4_2026-09-25.json
+  - pixi run python tasks/t01-merger-inclination/S3/peak_candidates.py tasks/t01-merger-inclination/S3/peak_candidates_2026-09-25.json
+  - pixi run python tasks/t01-merger-inclination/S3/plots.py
+outputs:
+  - result_C00-NRSur7dq4_NRSur7dq4v2_2026-09-25.json (series .npz moved to data/t01-merger-inclination/S3/)
+  - result_C00-NRSur7dq4_NRSur7dq4_2026-09-25.json (series .npz moved to data/t01-merger-inclination/S3/)
+  - peak_candidates_2026-09-25.json
+  - fig1_strain_amplitude_2026-09-25.{pdf,png}
+  - fig2_inclination_vs_time_2026-09-25.{pdf,png}
+  - fig3_emission_map_{NRSur7dq4v2,NRSur7dq4}_2026-09-25.{pdf,png}

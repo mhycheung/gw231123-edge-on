@@ -1,0 +1,79 @@
+{
+ "date": "2026-09-25",
+ "script": "tasks/t02-posterior-inclination/S1/gate.py",
+ "src_commit": "602eebf81d256f28edfd14140589ad0ad8f6e673",
+ "a": {
+  "iota_Q0_deg": 88.71503841002698,
+  "t01": 88.71503841002698,
+  "diff_deg": 0.0,
+  "control_wrong_N_deg": 47.63851205912937,
+  "pass": true,
+  "control_fails_as_required": true
+ },
+ "post": {
+  "n": 101,
+  "failed": 0,
+  "errors": [],
+  "max_abs_iotaQ_tref_minus_iota_rad": 0.00038382929758373763,
+  "b_pass": true,
+  "sec_per_sample_mean": 5.757811362200444,
+  "sec_per_sample_p95": 6.2512757778167725,
+  "helicity_E_positive_frac": 0.0,
+  "helicity_ambiguous0": 0
+ },
+ "prior": {
+  "n": 100,
+  "failed": 0,
+  "errors": [],
+  "max_abs_iotaQ_tref_minus_iota_rad": 0.00039240142114249643,
+  "b_pass": true,
+  "sec_per_sample_mean": 6.044554872512817,
+  "sec_per_sample_p95": 6.626785111427306,
+  "helicity_E_positive_frac": 0.004615384615384616,
+  "helicity_ambiguous0": 0
+ },
+ "c_pass": true,
+ "d": {
+  "n": 42,
+  "frac_within_0.1deg": 1.0,
+  "worst": [
+   {
+    "set": "prior",
+    "index": 86,
+    "t": -100.0,
+    "angle_deg": 0.013215999741756381
+   },
+   {
+    "set": "prior",
+    "index": 67,
+    "t": -1000.0,
+    "angle_deg": 0.013047859820375473
+   },
+   {
+    "set": "prior",
+    "index": 48,
+    "t": -100.0,
+    "angle_deg": 0.010003148134290166
+   },
+   {
+    "set": "post",
+    "index": 85,
+    "t": -100.0,
+    "angle_deg": 0.008716412583927278
+   },
+   {
+    "set": "prior",
+    "index": 72,
+    "t": -100.0,
+    "angle_deg": 0.008480483653995244
+   }
+  ],
+  "pass": true
+ },
+ "e": {
+  "sec_per_sample": 5.901183117356631,
+  "cpu_h_total": 38.0052584933093,
+  "chunk_size_for_15min": 152
+ },
+ "gate_pass": true
+}

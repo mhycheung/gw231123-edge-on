@@ -1,0 +1,91 @@
+{
+ "model": "NRSur7dq4",
+ "t_star_M": -2.6918694489747215,
+ "t_ref_M": -198.75231890652626,
+ "t_peak_total_amp_grid_M": -0.8999999968036718,
+ "f_ref_geom": 0.014760261697788078,
+ "N": [
+  0.822696833836135,
+  -0.368085178531243,
+  0.4332242155531266
+ ],
+ "iota_Q": 1.5664997043843012,
+ "iota_E": 1.5469923300587693,
+ "z_copr_t_star": [
+  -0.3813726893993057,
+  0.19855253193835667,
+  0.9028464785561323
+ ],
+ "e": [
+  -0.3393350550827831,
+  0.24562174341705006,
+  0.9080317613127492
+ ],
+ "e_opp": [
+  0.3067725168920989,
+  -0.11780611127696347,
+  -0.9444640506792658
+ ],
+ "angle_e_opp_from_minus_e": 0.13694435629768056,
+ "F_opp_over_F_e": 0.947711332142169,
+ "angle_e_zcopr": 0.06333167419814191,
+ "helicity_e": -0.3384303775838542,
+ "helicity_opp": 0.3556871031427954,
+ "helicity_ambiguous": false,
+ "iota_Q_at_t_ref": 1.1225514929402551,
+ "iota_input": 1.1227292632983898,
+ "t_star_after_frame_freeze": false,
+ "inputs": {
+  "mass_1": 156.9056031178424,
+  "mass_2": 142.76526938384222,
+  "spin_1x": -0.7507878610744102,
+  "spin_1y": -0.5992799028922391,
+  "spin_1z": -0.013782593921909204,
+  "spin_2x": -0.059524426161772066,
+  "spin_2y": 0.9844048876525949,
+  "spin_2z": -0.029694242111677226,
+  "iota": 1.1227292632983898,
+  "phase": 1.9914967391382514,
+  "luminosity_distance": 1121.4998157264695,
+  "log_likelihood": 218.1531172580967,
+  "f_ref": 10.0,
+  "approximant": "NRSur7dq4",
+  "index": 6096,
+  "label": "C00:NRSur7dq4",
+  "source": "data/t01-merger-inclination/posterior_samples.h5"
+ },
+ "settings": {
+  "model": "NRSur7dq4",
+  "dt": 0.1,
+  "f_low": 0.0,
+  "peak_tol": 0.01,
+  "n_sphere": 20000,
+  "angle_tol": 1e-06,
+  "series_before": 1000.0,
+  "series_after": 50.0,
+  "series_step": 1.0
+ },
+ "M_total_det_Msun": 299.6708725016846,
+ "t_star_s_from_t0": -0.003973269752314748,
+ "degrees": {
+  "iota_Q": 89.75382166971156,
+  "iota_E": 88.63613145147673,
+  "iota_Q_at_t_ref": 64.31746283158624,
+  "iota_input": 64.32764832282989,
+  "angle_e_opp_from_minus_e": 7.846333643992892,
+  "angle_e_zcopr": 3.6286376410511036
+ },
+ "provenance": {
+  "script": "src/merger_inclination/cli.py",
+  "src_commit": "2f63bcdcc6622f050ee1c7594c7af629c27145ed",
+  "date": "2026-09-25",
+  "argv": {
+   "pe": "data/t01-merger-inclination/posterior_samples.h5",
+   "json": null,
+   "label": "C00:NRSur7dq4",
+   "index": null,
+   "model": "NRSur7dq4",
+   "out": "tasks/t01-merger-inclination/S3/result_C00-NRSur7dq4_NRSur7dq4_2026-09-25.json"
+  }
+ }
+}

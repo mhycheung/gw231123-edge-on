@@ -1,0 +1,38 @@
+# Provenance of the t03 S3 outputs (summary JSON, figures 1-4, aggregated arrays, signal-norm
+# diagnostic, psi scan).
+src_commit: b79cf2b          # last commit touching src/ (mismatch_metric); the S2 chunks record 1a5ba14, same src
+environment_lock: pixi.lock
+commands:
+  S2: >-
+    sbatch --array=0-26 ... --export=ALL,CHUNK=400,N_WIN=8000,N_POST=2001
+    tasks/t03-mismatch-volume/S2/array.sh   (job 20909319; see S2/run.md)
+  signal_norm: pixi run python tasks/t03-mismatch-volume/S3/signal_norm.py
+  psi_scan: pixi run python tasks/t03-mismatch-volume/S3/psi_scan.py
+  S3: pixi run python tasks/t03-mismatch-volume/S3/aggregate.py
+  fig1_tpeak: pixi run python tasks/t03-mismatch-volume/S3/fig1_tpeak.py   # 2026-09-25, after aggregate.py gained an xlabel argument (default unchanged)
+inputs:
+  - path: data/t01-merger-inclination/posterior_samples.h5
+    sha256: f9f4a6394ad836b20165ae02d98639f0bda9ac159616b51eb2cffd37ea0d2fea
+    label: C00:NRSur7dq4 (PSDs, sky position of index 6096, posterior samples for set P)
+  - path: data/t01-merger-inclination/surrogates/NRSur7dq4.h5
+    sha256: 3fc2f58f6ed7a4fff58856b6c01a7dc9155954d2b9fa5d58126a7807826d45d5
+  - path: data/t03-mismatch-volume/win_points.npz
+    sha256: d3f0e4e23d8cb0e15ba366e256e68a09fadf99d0710f12183db3370553b8acf7
+  - path: data/t03-mismatch-volume/post_points.npz
+    sha256: cb7445853768f1b53af620e0129be10d3ae5091ec2290750ec7b740bf4195223
+  - path: data/t03-mismatch-volume/chunks/
+    sha256_of_sorted_file_checksums: 5b1f8db6f1f9fa199db463f11954332637ca02118d51a4fe570ab15e36e75170
+    note: "cd chunks && sha256sum *.npz | sha256sum"
+outputs:
+  - path: data/t03-mismatch-volume/win_2026-09-25.npz
+    sha256: 08b0dedef8c0aff563aca1c7355a169e85a661531e17bb101dbfe674b323bcc1
+  - path: data/t03-mismatch-volume/post_2026-09-25.npz
+    sha256: f3fc217d363a6c0c0d04712412169c57291d027df55e25daca26ab057356e5cd
+  - path: data/t03-mismatch-volume/signal_norm_2026-09-25.npz
+    sha256: c143af35e361698ed3d44fd5467d8feaa9d1ccfc70a2730c5a041fca7767c33b
+  - path: tasks/t03-mismatch-volume/S3/summary_2026-09-25.json
+    sha256: a6f6983ad5f6910cac7121dee5f31038913b3ca33e648a59504c91ff03710f47
+  - path: tasks/t03-mismatch-volume/S3/psi_scan_2026-09-25.json
+    sha256: 6817aef26528f9209bd46fcebf21605b2c335e038aa9374da3780e69e09aaef1
+  - path: tasks/t03-mismatch-volume/S3/chi_p_trend_2026-09-25.json
+    sha256: c805907bbbe1597baf684ed6c5318334916016c0ba2a7c8fd7f411083b968430
