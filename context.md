@@ -33,7 +33,6 @@ No task active. Wait for the user's answers to the t03 questions below and the c
 - t02: main band plot as |iota - 90 deg| or iota as planned? Asked on Slack 2026-09-25.
 - t03: review two deviations from the S1 gate wording (`tasks/t03-mismatch-volume/S1/controls.md`); deviation 2 closed in S3.
 - t03: headline statistic (ratio of medians, chosen, vs the plan's ratio of means), whether to add the distance-weighted score, and `milestone` for `r-t03-edge-on-metric-volume` (the user made the $s$ vs $|\cos\iota_Q(t_{\rm peak})|$ figure a milestone instead, 2026-09-25). See `tasks/t03-mismatch-volume/context.md`, "Open questions". Posted to the Feed 2026-09-25.
-- Whether to commit `lit_cache/1905.09300/` and `lit_cache/2609.07873/` (28 MB, untracked).
 
 ## Open questions
 

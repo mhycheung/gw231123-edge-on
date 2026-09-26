@@ -1,5 +1,7 @@
 # Is GW231123 edge-on at merger?
 
+The project site: <https://mhycheung.github.io/gw231123-edge-on/>
+
 This project investigates whether the gravitational-wave event GW231123 is surprisingly
 edge-on at merger, and what the implications would be if this were true.
 

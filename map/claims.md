@@ -2,73 +2,16 @@
 
 # Claims graph
 
-The logic of the project's results. Arrows: `A --> B` means result B rests on A (a result,
-a task, a dataset, or an external work from `citations/used.bib`). Each result sits in a box
-with the task it came from. Dotted arrows point from a new result to the one it supersedes.
+The logic of the project's results. An arrow from A to B means result B rests on A (a
+result, a task or a dataset); an arrow that a longer path of arrows already implies is left
+out (the table below lists every dependency). The external works a result uses, from
+`citations/used.bib`, are the keys in brackets on its card. Each result sits in a box with
+the task it came from. Dashed arrows point from a result to the result that superseded it,
+and from a result to the verification task (a card with a double border) that verified it.
 Colour shows the status; a thick red border marks a result that rests on failed, superseded
-or abandoned work and may no longer hold. Hexagons are verification tasks, with a dotted
-arrow to each result they verify.
+or abandoned work and may no longer hold.
 
-```mermaid
-flowchart LR
-  subgraph lit["External works (citations/used.bib)"]
-    b_GW231123PE2025["GW231123PE2025<br/>GW231123: a Binary Black Hole Merger with Total Mass 190-265"]
-    b_Ravishankar2026["Ravishankar2026<br/>NRSur7dq4v2: A multi-domain precessing surrogate model with "]
-    b_Varma2019["Varma2019<br/>Surrogate models for precessing binary black hole simulation"]
-    b_gwsurrogate["gwsurrogate<br/>gwsurrogate"]
-    b_lalsuite["lalsuite<br/>LVK Algorithm Library - LALSuite"]
-  end
-  subgraph n_t01_merger_inclination["task t01-merger-inclination: Orbital inclination at peak strain from NRSur7dq4v2"]
-    n_r_t01_beaming_offset["r-t01-beaming-offset: $\iota_E$ (direction of maximum emission) contains a beaming offset from the odd-$m$ modes<br/>statement · done · unverified"]
-    n_r_t01_ml_inclination_vs_time["r-t01-ml-inclination-vs-time: For the maximum-likelihood sample, $\iota_Q$ rises from 64 deg at $f_{\rm ref}$ to about 90 deg near merger<br/>figure · done · unverified"]
-    n_r_t01_nrsur_extrapolation["r-t01-nrsur-extrapolation: NRSur7dq4v2 is used outside its training range for GW231123<br/>assumption · done · unverified"]
-    n_r_t01_peak_ambiguity["r-t01-peak-ambiguity: The time of peak strain $t^*$ is unstable for GW231123: $|h|$ has three near-equal peaks<br/>statement · done · unverified"]
-  end
-  subgraph n_t02_posterior_inclination["task t02-posterior-inclination: Inclination vs time over the GW231123 NRSur posterior and prior"]
-    n_r_t02_inclination_bands["r-t02-inclination-bands: Credible bands of $\iota_Q(t)$ and $\iota_E(t)$ over the GW231123 posterior and prior<br/>figure · done · unverified"]
-    n_r_t02_near_edge_on_at_merger["r-t02-near-edge-on-at-merger: GW231123 is close to edge-on at merger: $P(|\iota_Q(0) - 90^\circ| < 20^\circ) = 0.82$, against 0.33 for the prior<br/>value · done · unverified · milestone"]
-  end
-  subgraph n_t03_mismatch_volume["task t03-mismatch-volume: Density of distinguishable waveforms vs inclination at merger"]
-    n_r_t03_edge_on_metric_volume["r-t03-edge-on-metric-volume: Edge-on orientations at merger have about 18 times more distinguishable waveforms per unit prior probability near GW231123 (median ratio); the ratio does not rise with $\chi_p$, though $s$ itself does<br/>value · done · unverified"]
-    n_r_t03_s_vs_inclination_figure["r-t03-s-vs-inclination-figure: Distinguishable waveforms per unit prior probability, $s$, against $|\cos\iota_Q(t_{\rm peak})|$: $s$ falls from edge-on to face-on, and its median rises with precession at every inclination<br/>figure · done · unverified · milestone"]
-    n_r_t03_signal_norm_mechanism["r-t03-signal-norm-mechanism: The metric volume element of the normalised signal grows as the network signal weakens: $\sqrt{\det g^\theta}\propto\langle h,h\rangle^{-4.5}$ when only $\psi$ changes<br/>statement · done · unverified"]
-  end
-  n_r_t01_nrsur_extrapolation --> n_r_t01_ml_inclination_vs_time
-  n_r_t01_peak_ambiguity --> n_r_t01_ml_inclination_vs_time
-  b_GW231123PE2025 --> n_r_t01_ml_inclination_vs_time
-  b_Ravishankar2026 --> n_r_t01_ml_inclination_vs_time
-  b_Ravishankar2026 --> n_r_t01_nrsur_extrapolation
-  b_Varma2019 --> n_r_t01_nrsur_extrapolation
-  b_GW231123PE2025 --> n_r_t01_nrsur_extrapolation
-  n_r_t01_nrsur_extrapolation --> n_r_t01_peak_ambiguity
-  n_r_t01_nrsur_extrapolation --> n_r_t02_inclination_bands
-  n_r_t01_beaming_offset --> n_r_t02_inclination_bands
-  n_r_t01_peak_ambiguity --> n_r_t02_inclination_bands
-  b_GW231123PE2025 --> n_r_t02_inclination_bands
-  b_Ravishankar2026 --> n_r_t02_inclination_bands
-  n_r_t02_inclination_bands --> n_r_t02_near_edge_on_at_merger
-  n_r_t01_nrsur_extrapolation --> n_r_t02_near_edge_on_at_merger
-  n_r_t01_peak_ambiguity --> n_r_t02_near_edge_on_at_merger
-  b_GW231123PE2025 --> n_r_t02_near_edge_on_at_merger
-  b_Ravishankar2026 --> n_r_t02_near_edge_on_at_merger
-  n_r_t03_signal_norm_mechanism --> n_r_t03_edge_on_metric_volume
-  n_r_t01_nrsur_extrapolation --> n_r_t03_edge_on_metric_volume
-  b_GW231123PE2025 --> n_r_t03_edge_on_metric_volume
-  b_Varma2019 --> n_r_t03_edge_on_metric_volume
-  b_lalsuite --> n_r_t03_edge_on_metric_volume
-  b_gwsurrogate --> n_r_t03_edge_on_metric_volume
-  n_r_t01_nrsur_extrapolation --> n_r_t03_s_vs_inclination_figure
-  b_GW231123PE2025 --> n_r_t03_s_vs_inclination_figure
-  b_Varma2019 --> n_r_t03_s_vs_inclination_figure
-  b_lalsuite --> n_r_t03_s_vs_inclination_figure
-  b_gwsurrogate --> n_r_t03_s_vs_inclination_figure
-  n_r_t01_nrsur_extrapolation --> n_r_t03_signal_norm_mechanism
-  b_GW231123PE2025 --> n_r_t03_signal_norm_mechanism
-  b_Varma2019 --> n_r_t03_signal_norm_mechanism
-  b_lalsuite --> n_r_t03_signal_norm_mechanism
-  classDef done fill:#dcfce7,stroke:#15803d
-  class n_r_t01_beaming_offset,n_r_t01_ml_inclination_vs_time,n_r_t01_nrsur_extrapolation,n_r_t01_peak_ambiguity,n_r_t02_inclination_bands,n_r_t02_near_edge_on_at_merger,n_r_t03_edge_on_metric_volume,n_r_t03_s_vs_inclination_figure,n_r_t03_signal_norm_mechanism done
-```
+![Claims graph](claims.svg)
 
 ## May no longer hold
 
