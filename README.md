@@ -3,9 +3,10 @@
 This project investigates whether the gravitational-wave event GW231123 is surprisingly
 edge-on at merger, and what the implications would be if this were true.
 
-This project is run in the open with the open-science framework
-(git@github.com:mhycheung/open-science.git): its plans, results, failed routes and
-sources are all written down, so that the work can be reproduced and checked.
+<!-- opsci:framework-line -->
+This project is run in the open with the open-science framework: <https://github.com/mhycheung/open-science>. Its
+plans, results, failed routes and sources are all written down, so that the work can be
+reproduced and checked.
 
 | where | what |
 |---|---|

@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install "opsci @ git+git@github.com:mhycheung/open-science.git@14a66f772e6c2626bcf6ef1ae2c388236eb1d13c#subdirectory=tools" mkdocs==1.6.1 mkdocs-material==9.7.7
+      - run: pip install "opsci @ git+https://github.com/mhycheung/open-science.git@814244c39a1b765b82939d3b77e3ab66c7296e65#subdirectory=tools" mkdocs==1.6.1 mkdocs-material==9.7.7
       - run: opsci site build . --out _site
       - uses: actions/upload-pages-artifact@v3
         with:
