@@ -37,5 +37,5 @@ points held 91 % of the edge-on sum, and the reading of $R_{\rm edge}$ depends o
 | `aggregate.py` | aggregation, bootstrap, figures 1–4, `summary_2026-09-25.json` |
 | `signal_norm.py` | $\langle h,h\rangle$ at 1000 Mpc per point, at the point's $\psi$, and its mean and maximum over $\psi$ |
 | `psi_scan.py`, `psi_scan_2026-09-25.json` | controlled $\psi$-only test at 6 points |
-| `fig1`–`fig4` (`.pdf`, `.png`, `.caption.md`) | $s$ vs $|\cos\iota_Q(0)|$ for W and P; $N_\rho$ and nuisance count; mechanism |
+| `fig1`–`fig4` (`.pdf`, `.png`, `.caption.md`) | $s$ vs $\lvert\cos\iota_Q(0)\rvert$ for W and P; $N_\rho$ and nuisance count; mechanism |
 | `provenance.yaml` | commit, lock file, commands, checksums |

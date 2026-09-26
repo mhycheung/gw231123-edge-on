@@ -21,8 +21,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install "opsci @ git+https://github.com/mhycheung/open-science.git@8764bee13ea3fdf97648356f331365093801dc1b#subdirectory=tools" mkdocs==1.6.1 mkdocs-material==9.7.7
-      - run: opsci site build . --out _site
+      - run: pip install "opsci @ git+https://github.com/mhycheung/open-science.git@79973cb240a6ed6cb25bb001cdfc427fcad376b5#subdirectory=tools" mkdocs==1.6.1 mkdocs-material==9.7.7
+      - run: opsci site build . --out _site --banner "$OPSCI_SITE_BANNER"
+        env:
+          OPSCI_SITE_BANNER: "Warning: this is an ongoing, unpublished project. Many results are very preliminary and unverified."
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
